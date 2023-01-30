@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link href="css/icon.css" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <script type="text/javascript"  src="js/bin/materialize.js"></script>
+      <script src="js/bin/jquery-1.7.2.min"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+ 
+    <body>
+      <div>
+     <nav><div class="nav-wrapper blue"><form ><div class="input-field"><input id="search_fcia" onkeyup="buscar_fcia();"  type="search" required><label class="label-icon" for="search" ><i class="material-icons" >search</i></label><i class="material-icons">close</i></div></form></div></nav>
+        <div id="ff_">
+    </div>
+    
+</div>
+
+    </boby>
+    </html>
+    <script type="text/javascript">
+   
+M.AutoInit();
+p();
+ var db = openDatabase('easyfarma', '1.0', 'easyfarma_app', 5 * 1024 * 1024);
+ 
+    db.transaction(function (tx) {
+         //tx.executeSql('DROP TABLE  MSJ_ENVIADOS');
+         
+          tx.executeSql('CREATE TABLE IF NOT EXISTS FARMACIAS (id auto_increment, id_fcia number,nombre_fcia text, logo_fcia text, direccion_fcia text, clasif_fcia number)');
+            
+         });
+
+ /*/
+   function buscar_fcia(){
+    var buscar = $('#search_fcia').val();
+    farmcias(buscar);
+   }
+function farmcias(buscar){
+
+var farmacias_="";
+  db.transaction(function (tx) {
+             
+            tx.executeSql('SELECT * FROM FARMACIAS WHERE (nombre_fcia LIKE ?)', ['%'+buscar+'%'], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias_+= '<div class="col s10 m7"><div class="card horizontal"><div class="Small card-image "> <img src="http://200.91.34.81:8080/easyfarma/imagenes/'+logo_fcia+'" onclick="info_farma('+id_fcia+')" ></div><div class="card-stacked"><div class="card-content"><h4>'+nombre_fcia+'</h4><img src="imagenes/'+clasif_fcia+'" width="50%"><p>'+direccion_fcia+'</p></div></div></div></div>'; 
+                   
+               }
+              
+                
+               
+                  
+                
+                        $('#ff_').html(farmacias_);
+                
+            });
+         });
+
+
+
+ 
+}
+/*/
+function p(){
+
+
+ var farmacias="";
+  db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM FARMACIAS', [], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias+= '<div class="col s10 m7"><div class="card horizontal"><div class="Small card-image "><img src="http://200.91.34.81:8080/easyfarma/imagenes/'+logo_fcia+'"onclick="info_farma('+id_fcia+')" ></div><div class="card-stacked"><div class="card-content"><h4>'+nombre_fcia+'</h4><img src="imagenes/'+clasif_fcia+'" width="50%"><p>'+direccion_fcia+'</p></div></div></div></div>'; 
+                   
+               }
+              
+                
+               
+                  
+                
+                        $('#ff_').html(farmacias);
+                
+            });
+         });
+
+
+
+}
+
+  
+    </script>

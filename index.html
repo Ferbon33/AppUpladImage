@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="css/icon.css" rel="stylesheet">
+      <!-- https://cordova.apache.org/docs/en/3.1.0/cordova/notification/notification.html TUTO CORDOVA/PHONEGAP-- >
+      <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+       <script type="text/javascript"  src="js/app_js/sincroniza_farmacias.js"></script>
+      <script type="text/javascript"  src="js/bin/materialize.js"></script>
+     <script src="js/bin/jquery-1.7.2.min"></script>
+     <SCRIPT TYPE="text/javascript" src="phonegap-1.4.1.js"></SCRIPT>
+     
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <style type="text/css">
+ 
+
+ </style>
+ 
+    <body>
+      <div class="navbar-fixed" id="cambia" >
+      <nav class="nav-extended" ><div class="nav-wrapper blue" ><a href="#" class="brand-logo center">EasyFarma  <img src="imagenes/logo_blanco.png" width="15%"></a><a href="#" class="brand-logo right"><i class="material-icons">more_vert</i></a><!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>--><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></div><div class="nav-content blue" ><ul class="tabs tabs-transparent"><li class="tab"><a href="#test-swipe-1">Nueva Consulta</a></li><li class="tab"><a href="#test-swipe-2" onclick="respuestas();">Respuestas</a></li><li class="tab"><a href="#test-swipe-3" onclick="p();">Farmacias</a></li></ul></div></nav>
+</div>
+     <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background green">
+       <!-- <img src="imagenes/office.jpg">-->
+      </div>
+      <a href="#user"><img  src="imagenes/logo_blanco.png" width="20%" /></a>
+      <a href="#name"><span class="white-text name" id="apeynom"></span></a>
+      <a href="#email"><span class="white-text email">easyfarma@hotmail.com</span></a>
+      <p id="id_cliente"></p>
+    </div></li>
+    <li><a href="#!"><i class="material-icons">edit_location</i>Cambiar Zona</a></li>
+    <li><a class="modal-trigger" id="btn_modal" onclick="login_out()"  href="#subscrpcion"><i class="material-icons">person</i>Login in/Out</a></li>
+    <li><a href="#!" onclick="sincroniza_farmacias()"><i class="material-icons">error</i>Actualizar</a></li>
+        <li><div class="divider"></div></li>
+  </ul>
+  
+<main>
+ <br><br><br>
+  <div id="test-swipe-1" >
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+        
+      </div>
+    </form>
+    
+
+
+    <div class="input-field col s10" align="center">
+          <i class="material-icons prefix" onclick="$('#mensaje').focus();">mode_edit</i>
+          <textarea id="mensaje" class="materialize-textarea"></textarea>
+          <label for="icon_prefix2">Escriba el Mensaje</label>
+        </div>
+        <div class="row col s10" align="center" >
+        
+   </div>
+   <p id="ultimo_id"></p>
+  <div class="row" align="center" >
+        <a class="waves-effect waves-light btn-large blue modal-trigger" href="#modal1" onclick="select_farma()" ><i class="material-icons right"id="h"></i>Elija la Farmacias</a>
+   </div>
+
+   <div class="row" align="center" >
+   <a class="waves-effect waves-light btn-large blue " onclick="ver_botones_imagen();"  ><i class="material-icons left"></i>Adjunte Foto de Receta</a>
+   </div>
+   <div class="row" align="center" id="botones_imagen" >
+
+     
+        
+   </div>
+   
+        
+   
+  
+ 
+    
+   
+   
+   
+  </div>
+ <!--<img  src="imagenes/no_foto_cancel.png" style='width:100px;height:100px;' id='foto_camara'>enviar_sms()-->
+   <div class="fixed-action-btn">
+   <a  id="scale-demo" class="btn-floating btn-large scale-transition waves-effect scale-in waves-light green" onclick="enviar_sms()"><i class="large material-icons">send</i></a> 
+ </div>
+  <!-- modal farmacias -->
+
+  </div>
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="navbar-fixed">
+    <nav><div class="nav-wrapper blue"><form ><div class="input-field"><input id="input_select_farma" type="search" onkeyup="farmcias_select()" required><label class="label-icon" for="search" ><i class="material-icons" >search</i></label><i class="material-icons" onclick="$('#input_select_farma').val('');" >close</i></div></form></div></nav></div>
+    <div class="modal-content">
+
+      <div id="select_farma">
+    </div>
+    <div class="fixed-action-btn">
+   <a   class="btn-floating btn-large scale-transition modal-close waves-effect scale-in waves-light blue" onclick="$('#h').html('check')"><i class="large material-icons">check</i></a> 
+</div>
+    </div>    
+  </div>
+    <!-- modal farmacias -->
+<!-- models subscrpcion -->
+<div id="subscrpcion" class="modal">
+    <div class="modal-content">
+      <h4>Registro</h4>
+      <div class="input-field">
+          <input placeholder="Apellido" id="apellido" type="text" class="validate">
+      </div>
+        <div class="input-field">
+          <input placeholder="Nombre" id="nombre" type="text" class="validate">
+      </div>
+        <div class="input-field">
+          <input placeholder="Email" id="mail" type="text" class="validate">
+      </div>
+        <a class="modal-close waves-effect waves-light btn blue" onclick="registro();" >registrar</a>
+
+    </div>
+ </div>
+  <!-- model subscrpcion-->
+
+
+  <div id="test-swipe-2" ><!-- pantalla de respuestas a mensajes -->
+    <div id="preguntas"></div>
+    <div id="respuestas"></div>
+
+  
+<div class="fixed-action-btn">
+   <p id="ver_mj_env_back"><a  id="scale-demo"  class="btn-floating btn-large scale-transition waves-effect scale-in waves-light green"><i class="large material-icons" onclick="limpia_mensajes()" >delete</i></a></p>
+</div>
+  </div>
+  <div id="test-swipe-3" >
+     <div class="fixed-action-btn">
+  <a href="#" onclick="buscar()"  class="btn-floating btn-large scale-transition waves-effect scale-in waves-light  green"><i class="material-icons">search</i></a>
+  </div>
+  <div class="content">
+    <div id="ff">
+    </div>
+  </div>
+    
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large green">
+    <i class="large material-icons">add</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red" onclick="buscar ();"><i class="material-icons">search</i></a></li>
+    <li><a class="btn-floating blue "><i class="material-icons">location_on</i></a></li>
+    
+  </ul>
+</div>
+  </div>
+  
+</main>
+
+     
+  
+      <!--JavaScript at end of body for optimized loading-->
+     <script type="text/javascript">
+  M.AutoInit();
+///////////////////////////// crea base de datos
+var db = openDatabase('easyfarma', '1.0', 'easyfarma_app', 5 * 1024 * 1024);
+
+ db.transaction(function (tx) {
+        //tx.executeSql('DELETE FROM   CLIENTE');
+       // tx.executeSql('DROP TABLE   MSJ_ENVIADOS');
+        //tx.executeSql('DROP TABLE   RESPUESTAS_FCIAS');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS MSJ_ENVIADOS (id auto_increment unique, id_farmcia text, mensaje text, zona number, fecha_hora text, id_imagen text,cant_resp number)');
+
+         tx.executeSql('CREATE TABLE IF NOT EXISTS RESPUESTAS_FCIAS (id auto_increment unique, id_fcia number,nombre_fcia text, respuesta text, id_mensaje number, fecha_hora text)');
+
+          tx.executeSql('CREATE TABLE IF NOT EXISTS FARMACIAS (id auto_increment, id_fcia number,nombre_fcia text, logo_fcia text, direccion_fcia text, clasif_fcia number)');
+
+         tx.executeSql('CREATE TABLE IF NOT EXISTS CLIENTE (id auto_increment, nombre text,apellido text, mail text, id_cliente number,zona number)');
+            
+         });
+         ////////////////////////
+  
+ var id_cliente=0;
+ var zona = 0;
+
+ buscar_datos_cliente();
+function buscar_datos_cliente(){
+  db.transaction(function (tx) {
+             
+            tx.executeSql('SELECT * FROM CLIENTE ', [], function (tx, resultado) {
+            
+                
+                 
+                  var len = resultado.rows.length;
+                  for (i = 0; i < len; i++) {
+                    id_cliente = resultado.rows.item(i).id_cliente;
+                    zona = resultado.rows.item(i).zona;
+                    nombre = resultado.rows.item(i).nombre;
+                    apellido =  resultado.rows.item(i).apellido;
+                  };
+                 
+                 
+                 datos_cliente(id_cliente,zona,nombre,apellido);
+            });
+         });
+}
+ 
+function datos_cliente(id_cliente,zona,nombre,apellido){
+   id_cliente=id_cliente;
+   zona = zona;
+   
+   $('#apeynom').html(nombre+', '+apellido+' /#id:'+id_cliente);
+ if (id_cliente==0) {
+  document.getElementById('btn_modal').click();
+  
+ };
+}
+
+ 
+  
+var fecha = new Date();
+var fecha_actual=fecha.getDate()+'/'+(fecha.getMonth()+1)+'/'+fecha.getFullYear()+'-Hs'+fecha.getHours()+':'+fecha.getMinutes();
+
+ 
+
+function p(){
+
+
+ var farmacias="";
+  db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM FARMACIAS', [], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias+= '<div class="col s10 m7"><div class="card horizontal"><div class="Small card-image "><img src="http://200.91.34.81:8080/easyfarma/imagenes/'+logo_fcia+'"onclick="info_farma('+id_fcia+')" ></div><div class="card-stacked"><div class="card-content">'+nombre_fcia+'<img src="imagenes/'+clasif_fcia+'" width="50%"><p>'+direccion_fcia+'</p></div></div></div></div>'; 
+                   
+               }
+              
+                
+               
+                  
+                
+                        $('#ff').html(farmacias);
+                
+            });
+         });
+
+
+
+}
+
+function respuestas(){
+
+  var res="";
+  db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM MSJ_ENVIADOS', [], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+          for (i = 0; i < len; i++){
+                  id = resultado.rows.item(i).id;
+                  id_farmacia = resultado.rows.item(i).id_farmcia;
+                  mensaje = resultado.rows.item(i).mensaje;
+                  fecha_hora = resultado.rows.item(i).fecha_hora;
+                  id_imagen = resultado.rows.item(i).id_imagen;
+                  cant_resp = resultado.rows.item(i).cant_resp;
+          res += '<li class="collection-item avatar" onclick="ver_mensaje_fcia('+id+');"><i class="material-icons circle green">message</i><span class="title">('+id+')</span><span class="title">'+fecha_hora+'</span><p>'+mensaje+'</p><a href="#!" class="secondary-content"></a><span class="new badge red">'+cant_resp+'</span></li>';
+                   
+                   
+               }
+              
+                
+               
+                  
+                
+                       $('#preguntas').html('<ul class="collection" >'+res+'</ul>');
+                        $('#respuestas').html('');
+            });
+         });
+
+  
+  
+  $('#ver_mj_env_back').html('<a  id="scale-demo"  class="btn-floating btn-large scale-transition waves-effect scale-in waves-light green"><i class="large material-icons" onclick="limpia_mensajes()" >delete</i></a>');
+
+ 
+
+}
+
+function emergente_toast(mensaje){
+  M.toast({html: mensaje, classes: 'rounded'});
+}
+
+function enviar_sms(id_imagen){
+   //foto_desde_camara();
+ //emergente_toast('Enviando mensaje');
+//id_imagen="sin imagen";
+  if (!id_imagen){
+    id_imagen="sin_imagen";
+  }
+//$('#foto_camara').attr('src','imagenes/no_foto_cancel.png');
+ 
+ var id_farmcia =  fcia_selected;
+ var mensaje = $('#mensaje').val();
+ //var zona = 0;
+var id=0;
+var cant_resp=0;
+db.transaction(function (tx) {
+  
+            tx.executeSql('SELECT *  FROM MSJ_ENVIADOS', [], function (tx, resultado) {
+            
+                  id = resultado.rows.length;
+                  id=id+1;
+                enviar_ultm_id(id);
+
+           tx.executeSql('INSERT INTO MSJ_ENVIADOS (id,id_farmcia,mensaje,zona,fecha_hora,id_imagen,cant_resp) VALUES (?, ?, ?, ?,?,?,?)',[id,id_farmcia,mensaje,zona,fecha_actual,id_imagen,cant_resp]);
+         });
+            
+
+           
+            
+         });
+
+
+function enviar_ultm_id(id){
+  $.ajax({
+        dataType: "html",
+        type: "POST",
+        data: 'id_cliente='+id_cliente+'&mensaje='+mensaje+'&id_farmacia='+id_farmcia+'&id_imagen='+id_imagen+'&id_mensaje_cliente='+id,
+        url: 'http://200.91.34.81:8080/easyfarma/backend_app/envia_mensaje.php',
+              }).done(function (resultado) {
+              var datosRecibidos = JSON.parse(resultado);
+              var recibido = "";         
+              
+                $.each( datosRecibidos, function ( key, value ) {
+                             
+               recibido = value.recibido_ok;
+               
+               
+               
+                });
+                if (recibido=='ok') {
+                    emergente_toast('Enviado Correctamente');
+
+                }else{
+                  emergente_toast('No se pudo enviar mensaje');
+                }
+               
+               fcia_selected="";
+               $('#h').html('');
+               $('#botones_imagen').html('');
+        });
+
+
+
+}
+
+                
+  //M.toast({html: 'Mensaje Enviado Correctamente', classes: 'rounded'});    
+$('#mensaje').val('');
+
+
+}
+
+////////////////////////captura imagen
+     
+
+var origen_foto;   
+    var destino_tipo; 
+
+    
+    document.addEventListener("deviceready",iniciar_dip,false);
+    function iniciar_dip() {
+        origen_foto=navigator.camera.PictureSourceType;
+        destino_tipo=navigator.camera.DestinationType;
+    }
+
+function capturePhoto() {
+     
+       navigator.camera.getPicture(foto_desde_camara, error, { 
+        quality: 50,
+        destinationType: destino_tipo.DATA_URL 
+      });
+    }
+
+   
+
+ function foto_desde_camara(imageData) {
+      
+      var foto_camara = document.getElementById('foto_camara');
+
+      
+      foto_camara.style.display = 'block';
+
+      
+      foto_camara.src = "data:image/jpeg;base64," + imageData;
+      
+
+     
+    }
+
+    function error(message) {
+      alert('se produjo un error ' + message);
+    }
+
+
+/////////////////////////fin captura imagen
+
+ function buscar (){
+ btn_busca='<nav><div class="nav-wrapper blue"><form ><div class="input-field"><input id="search_fcia" onkeyup="buscar_fcia();"  type="search" required><label class="label-icon" for="search" ><i class="material-icons" >search</i></label><i class="material-icons" onclick="elimina_buscar()">close</i></div></form></div></nav>'; 
+$('#cambia').html(btn_busca);
+  
+ }
+
+function buscar_fcia (){
+  var buscar = $('#search_fcia').val();
+    
+    farmcias(buscar);
+}
+
+
+
+ function elimina_buscar(){
+btn_busca='<nav class="nav-extended" ><div class="nav-wrapper blue" ><a href="#" class="brand-logo center">EasyFarma  <img src="imagenes/logo_blanco.png" width="15%"></a><a href="#" class="brand-logo right"><i class="material-icons">more_vert</i></a><!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>--><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></div><div class="nav-content blue" ><ul class="tabs tabs-transparent"><li class="tab"><a href="#test-swipe-1">Nueva Consulta</a></li><li class="tab"><a href="#test-swipe-2" onclick="respuestas();">Respuestas</a></li><li class="tab"><a href="#test-swipe-3" class="active" onclick="p();">Farmacias</a></li></ul></div></nav>';
+$('#cambia').html(btn_busca);
+M.AutoInit();
+//window.location.href = '#test-swipe-3';
+ }
+
+
+ function limpia_mensajes(){
+ 
+   db.transaction(function (tx) {
+      //  tx.executeSql('DELETE FROM MSJ_ENVIADOS');
+       // tx.executeSql('DELETE FROM RESPUESTAS_FCIAS');
+        
+  
+
+         });
+  
+  $('#respuestas').html('');
+  $('#preguntas').html('');
+ }
+
+
+/////////////////////////////////////////subir imagen
+
+ function subir_imagen_cam(){
+  document.addEventListener("deviceready", iniciar_disp, false);
+
+        
+        function iniciar_disp() {
+            
+            navigator.camera.getPicture(captura_imagen, function(mensaje) { alert('Cancelado'); }, { quality         : 10, 
+                  destinationType : navigator.camera.DestinationType.FILE_URI, //// permite enviat
+                  //destinationType : navigator.camera.DestinationType.DATA_URL,   /// permite mostrar
+                } );
+        }
+
+        function captura_imagen(image_cam) {
+            //var id_cliente="001";
+            var id_fcia='005';
+            
+            var opciones = new FileUploadOptions();
+            opciones.fileKey="file";
+            opciones.fileName= id_fcia+"-"+id_cliente+"-"+image_cam.substr(image_cam.lastIndexOf('/')+1);
+            var id_imagen =id_fcia+"-"+id_cliente+"-"+image_cam.substr(image_cam.lastIndexOf('/')+1);
+            opciones.mimeType="image/jpeg";
+            
+            var parametros = {};
+            parametros.value1 = "prueba";
+            parametros.value2 = "prueba";
+
+            opciones.params = parametros;              
+
+            var ft = new FileTransfer();
+            ft.upload(image_cam, encodeURI("http://200.91.34.81:8080/easyfarma/recibe_imagen.php"), enviar_sms(id_imagen), error, opciones);
+             //var foto_camara = document.getElementById('foto_camara');
+             //foto_camara.style.display = 'block';
+             //foto_camara.src = "data:image/jpeg;base64," + image_cam;
+            
+        }
+
+         function error(error) {
+            alert("a ocurrido un error en el codigo = " + error.code);
+            console.log("origen " + error.source);
+            console.log("objetivo " + error.target);
+        }
+
+        
+
+
+ 
+ }
+///////////////////////////////////////////////////////////////////
+function subir_imagen_lib(){
+
+
+
+        document.addEventListener("deviceready", iniciar_disp, false);
+
+        
+        function iniciar_disp() {
+            
+            navigator.camera.getPicture(
+                obtener_imagen,
+                function(mensaje) { alert('se cancelo la libreria')+mensaje; },
+                {
+                    quality         : 10,
+                    destinationType : navigator.camera.DestinationType.FILE_URI,
+                    sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
+                }
+            );
+        }
+
+        function obtener_imagen(imagen_desde_libreria) {
+          //var id_cliente="001";
+            var id_fcia='005';
+           
+            var opciones = new FileUploadOptions();
+            opciones.fileKey="file";
+            
+            opciones.mimeType="image/jpeg";
+            var id_imagen =id_fcia+"-"+id_cliente+"-"+imagen_desde_libreria.substr(imagen_desde_libreria.lastIndexOf('/')+1);
+            var res = id_imagen.replace("%", "_");
+            opciones.fileName=res;
+            var parametros = {};
+            parametros.value1 = "prueba";
+            parametros.value2 = "prueba";
+
+            opciones.params = parametros;              
+
+            var ft = new FileTransfer();
+            ft.upload(imagen_desde_libreria, encodeURI("http://200.91.34.81:8080/easyfarma/recibe_imagen.php"), enviar_sms(res), error, opciones);
+
+            
+        }
+
+        
+
+        function error(error) {
+            alert("a ocurrido un error en el codigo = " + error.code);
+            console.log("origen " + error.source);
+            console.log("objetivo " + error.target);
+        }
+
+
+ }
+ function g(){
+var f = $('#foto_camara').attr('src');
+  alert(f);
+ }
+
+
+
+function farmcias(buscar){
+
+
+ var farmacias_="";
+  db.transaction(function (tx) {
+             
+            tx.executeSql('SELECT * FROM FARMACIAS WHERE (nombre_fcia LIKE ?)', ['%'+buscar+'%'], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias_+= '<div class="col s10 m7"><div class="card horizontal"><div class="Small card-image "> <img src="http://200.91.34.81:8080/easyfarma/imagenes/'+logo_fcia+'" onclick="info_farma('+id_fcia+')" ></div><div class="card-stacked"><div class="card-content">'+nombre_fcia+'<img src="imagenes/'+clasif_fcia+'" width="50%"><p>'+direccion_fcia+'</p></div></div></div></div>'; 
+                   
+               }
+              
+                
+               
+                  
+                
+                        $('#ff').html(farmacias_);
+                
+            });
+         });
+
+
+
+}
+ // !! Assumes variable fileURL contains a valid URL to a text file on the device,
+//    for example, cdvfile://localhost/persistent/path/to/file.txt
+
+function info_farma(id_farmacia){
+
+  window.location="info_farm.html?"+id_farmacia;
+}
+
+function ver_mensaje_fcia(id){
+res="";
+
+  db.transaction(function (tx) {
+             
+            tx.executeSql('SELECT * FROM MSJ_ENVIADOS WHERE (id = ? )', [id], function (tx, resultado) {
+            
+             res_env = '<div class="row"><div class="col s12 m6"><div class="card blue darken-1"><div class="card-content white-text"><span class="card-title">'+resultado.rows.item(0).mensaje+'</span><p>Enviada:'+resultado.rows.item(0).fecha_hora+'</p></div></div></div> <img src="http://200.91.34.81:8080/easyfarma/imagenes_enviadas/'+resultado.rows.item(0).id_imagen+'.jpg" width="50%"></div>';
+                $('#preguntas').html('<ul class="collection" >'+res_env+'</ul>');
+                });
+             tx.executeSql('SELECT * FROM RESPUESTAS_FCIAS WHERE (id_mensaje = ? )', [id], function (tx, resultado) {
+            
+               var len = resultado.rows.length;
+               var res_rec = "";
+          for (i = 0; i < len; i++){
+                  respuesta = resultado.rows.item(i).respuesta;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  fecha_hora = resultado.rows.item(i).fecha_hora;
+                 
+              
+             res_rec +=  '<div class="row"><div class="col s12 m6"><div class="card green darken-1"><div class="card-content white-text"><span class="card-title">'+respuesta+'</span><p>Respondido:'+nombre_fcia+' - '+fecha_hora+'hs</p></div></div></div></div>';
+                
+                }
+
+                $('#respuestas').html('<ul class="collection" >'+res_rec+'</ul>');
+                });
+             
+               
+                  
+                $('#ver_mj_env_back').html('<a  id="scale-demo"  class="btn-floating btn-large scale-transition waves-effect scale-in waves-light blue"><i class="large material-icons" onclick="respuestas()" >arrow_back</i></a>');
+                          
+                
+               
+            
+         });
+
+
+
+}
+
+
+
+function select_farma(){
+
+
+ var farmacias="";
+  db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM FARMACIAS', [], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias+= '<li class="collection-item avatar" onclick="agrega_fcia('+i+','+id_fcia+')"><img src="imagenes/logo.png" alt="" class="circle"><span class="title">'+nombre_fcia+'</span><p><i class="material-icons">location_on</i>-Km<br>'+direccion_fcia+'</p><a href="#!" class="secondary-content"><p id="icon_'+i+'"></p></a></li>'; 
+                   
+               }
+              
+                
+                
+                  
+                
+                        $('#select_farma').html('<ul class="collection with-header">'+farmacias+'</ul>');
+                
+            });
+         });
+
+
+
+}
+var fcia_selected="";
+
+function agrega_fcia(i,id_fcia){
+$("#icon_"+i+"").html('<i class="material-icons" >check</i>');
+fcia_selected +=id_fcia+"-";
+
+}
+
+function farmcias_select(){
+ var buscar=$('#input_select_farma').val();
+
+ var farmacias="";
+  db.transaction(function (tx) {
+             
+            tx.executeSql('SELECT * FROM FARMACIAS WHERE (nombre_fcia LIKE ?)', ['%'+buscar+'%'], function (tx, resultado) {
+            
+                
+                 var len = resultado.rows.length;
+          for (i = 0; i < len; i++){
+                  id_fcia = resultado.rows.item(i).id_fcia;
+                  nombre_fcia = resultado.rows.item(i).nombre_fcia;
+                  logo_fcia = resultado.rows.item(i).logo_fcia;
+                  direccion_fcia = resultado.rows.item(i).direccion_fcia;
+                  clasif_fcia = resultado.rows.item(i).clasif_fcia;
+
+         farmacias+= '<li class="collection-item avatar" onclick="agrega_fcia('+i+','+id_fcia+')"><img src="imagenes/logo.png" alt="" class="circle"><span class="title">'+nombre_fcia+'</span><p><i class="material-icons">location_on</i>-Km<br>'+direccion_fcia+'</p><a href="#!" class="secondary-content"><p id="icon_'+i+'"></p></a></li>';  
+                   
+               }
+              
+                
+               
+                  
+                
+                        $('#select_farma').html('<ul class="collection with-header">'+farmacias+'</ul>');
+                
+            });
+         });
+
+
+
+}
+
+function ver_botones_imagen(){
+
+  $('#botones_imagen').html('<a class="btn-floating btn-large waves-effect waves-light blue" onclick="subir_imagen_cam()"><i class="material-icons">add_a_photo</i></a><a class="btn-floating btn-large waves-effect waves-light blue" onclick="subir_imagen_lib()"><i class="material-icons">attach_file</i></a>');
+  
+}
+
+
+setInterval(lee_respuestas_farmacia, 3000);
+function lee_respuestas_farmacia(){
+/*/
+  db.transaction(function (tx) {
+         tx.executeSql('DELETE FROM RESPUESTAS_FCIAS');
+               //      tx.executeSql('DELETE FROM FARMACIAS');
+      //tx.executeSql('DROP TABLE  MSJ_ENVIADOS');
+         });
+  /*/
+  //var id_cliente='1';
+  //var id_mensaje_cliente='1';
+  $.ajax({
+        dataType: "html",
+        type: "POST",
+        data: 'id_cliente='+id_cliente,
+        url: 'http://200.91.34.81:8080/easyfarma/backend_app/lee_respuestas_cliente.php',
+              }).done(function (resultado) {
+              var datosRecibidos = JSON.parse(resultado);
+                     
+              var id_mensaje = "";
+              var respuesta = "";
+              var id_farmacia = "";
+              var nombre_fcia = ""
+                $.each( datosRecibidos, function ( key, value ) {
+                             
+               
+                db.transaction(function (tx) {
+                  
+   
+
+   tx.executeSql('SELECT * FROM RESPUESTAS_FCIAS WHERE (id_mensaje = ? )and(id_fcia = ? ) ', [value.id_mensaje,value.id_farmacia] ,function (tx, resultado) {      
+                      
+                      var len = resultado.rows.length;
+                      var cant_resp=1;
+                      if (len=="") {
+                         // alert(len);
+                    //   db.transaction(function (tx) {
+                  
+                  tx.executeSql('INSERT INTO RESPUESTAS_FCIAS (id_fcia,nombre_fcia,respuesta,id_mensaje,fecha_hora) VALUES (?, ?, ?, ?, ?)',[value.id_farmacia,value.nombre_fcia,value.respuesta,value.id_mensaje,value.fecha_hora]);
+
+                    tx.executeSql('UPDATE MSJ_ENVIADOS' + ' SET cant_resp = ?' + ' WHERE id = ?',[cant_resp, value.id_mensaje]);
+
+                      };
+                      
+                   });
+
+       });
+                              
+               
+               
+        });
+
+
+});
+
+}
+
+
+function registro(){
+ 
+var nombre = $('#nombre').val();
+var apellido = $('#apellido').val();
+var mail = $('#mail').val();
+var zona=1;
+ 
+ $('#botones_imagen').html('<img src="imagenes/jar-loading.gif" width="30%">');
+ 
+$.ajax({
+        dataType: "html",
+        type: "POST",
+        data: 'nombre='+nombre+'&apellido='+apellido+'&mail='+mail+'&zona='+zona,
+        url: 'http://200.91.34.81:8080/easyfarma/backend_app/registra_cliente.php',
+              }).done(function (resultado) {
+              var datosRecibidos = JSON.parse(resultado);
+              var id="";     
+              
+                $.each( datosRecibidos, function ( key, value ) {
+                     id=value.id_cliente;        
+               db.transaction(function (tx) {
+               tx.executeSql('INSERT INTO CLIENTE (nombre,apellido,zona,id_cliente,mail) VALUES (?,?, ?, ?, ?)',[value.nombre,value.apellido,value.zona,value.id_cliente,value.id_cliente]);
+                      }); 
+
+       });                        
+          setTimeout(oculta_gif, 5000);  
+          if (id=="") {
+            emergente_toast('Error No se pudo Registrar');
+          }
+        });
+
+
+
+}
+
+function oculta_gif(){
+  $('#botones_imagen').html('');
+  sincroniza_farmacias();
+}
+
+function login_out(){
+   id_cliente='0';
+   $('#mjs_recibidos').html('');
+  db.transaction(function (tx) {
+          
+        tx.executeSql('DELETE FROM   CLIENTE');
+        tx.executeSql('DELETE FROM   MSJ_ENVIADOS');
+        tx.executeSql('DELETE FROM   RESPUESTAS_FCIAS');
+        
+           
+         });
+if (id_farmacia!='0') {location.reload();};   
+
+}
+
+     </script>
+ 
+
+      
+    </body>
+  </html>
+  
+ 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="css/icon.css" rel="stylesheet">
+
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+    async defer></script>-->
+      <script type="text/javascript"  src="js/bin/materialize.js"></script>
+     <script src="js/bin/jquery-1.7.2.min"></script>
+
+     
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+ 
+    <body>
+      <div class="navbar-fixed">
+
+      <nav class="nav-extended" >
+    <div class="nav-wrapper blue" >
+      <a href="#" class="brand-logo" id="nombre"></a>
+      <a href="#" onclick="history.back(0)" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">arrow_back</i></a>
+    </div>
+   </div> 
+   <div align="center" id="logo">    
+   </div>
+      
+    <div class="nav-content blue" >
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a href="#test-swipe-1">Direccion</a></li>
+        <li class="tab"><a href="#test-swipe-2" >Obras Sociales</a></li>
+        <li class="tab"><a href="#test-swipe-3" >Promociones</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+    </div>
+ </div>
+   
+
+     
+   <div id="test-swipe-1" >
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Horarios</span>
+          <p id="horarios"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Telefono</span>
+          <p id="telefono"></p>
+           
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Direccion</span>
+          <p id="direccion"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div align="center">  
+<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13898.11530945773!2d-66.8705549802246!3d-29.442564499999985!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1531925088596"  width="300"  frameborder="0" style="border:0" allowfullscreen></iframe></div> 
+   </div>
+  <div id="test-swipe-2">
+<div class="collection">
+        <a href="#!" class="collection-item">APOS</a>
+        <a href="#!" class="collection-item">MEDIFE</a>
+        <a href="#!" class="collection-item">OSDE</a>
+        <a href="#!" class="collection-item">PAMI</a>
+      </div>
+
+ 
+  
+  </div>
+  <div id="test-swipe-3" >
+
+  </div>
+    </boby>
+    </html>
+    <script type="text/javascript">
+    
+M.AutoInit();
+
+ var id_farmacia = window.location.search.substr(1);
+
+
+ $.ajax({
+        dataType: "html",
+        type: "POST",
+        data: 'zona=542&id_farmacia='+id_farmacia,
+        url: 'http://200.91.34.81:8080/easyfarma/backend_app/farmacias.php',
+              }).done(function (resultado) {
+              var datosRecibidos = JSON.parse(resultado);
+              var nombre ;
+               var direccion ;
+               var logo ;
+               var calif_fcia ;
+               var telefono ;
+               var horarios ;
+               var maps_lat ;
+               var maps_long ;
+              
+                $.each( datosRecibidos, function ( key, value ) {
+               
+                nombre = value.nombre;
+                direccion = value.direccion;
+                logo = value.logo;
+                calif_fcia = value.calif_fcia;
+                telefono = value.telefono;
+                horarios = value.horarios;
+                maps_lat = value.maps_lat;
+                maps_long = value.maps_long;
+
+                });
+               
+            $('#horarios').html(horarios);   
+            $('#telefono').html(telefono);
+            $('#direccion').html(direccion);
+            $('#nombre').html(nombre);
+            $('#logo').html('<img src="http://200.91.34.81:8080/easyfarma/imagenes/'+logo+'" width="200"  style="border:2" allowfullscreen>');
+        });
+    
+    
+
+         
+
+    </script>
